@@ -8,7 +8,11 @@ DOWNLOAD_DIR = os.path.join(os.path.dirname(__file__), 'nltk_data')
 if not os.path.exists(DOWNLOAD_DIR):
     os.makedirs(DOWNLOAD_DIR)
 
-# Download the 'punkt' package to our local directory
-nltk.download('punkt', download_dir=DOWNLOAD_DIR)
+# List of packages to download
+packages = ['punkt', 'stopwords']
 
-print(f"NLTK 'punkt' package downloaded to {DOWNLOAD_DIR}")
+for package in packages:
+    print(f"Downloading NLTK package: {package}")
+    nltk.download(package, download_dir=DOWNLOAD_DIR)
+
+print(f"\nNLTK packages downloaded to {DOWNLOAD_DIR}")
