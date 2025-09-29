@@ -38,21 +38,19 @@ function App() {
     setResult(null);
     setError('');
 
-    // Backend URL
-    const backendUrl = 'http://127.0.0.1:8000';
     let endpoint = '';
     let body: BodyInit | null = null;
     const headers: HeadersInit = {};
 
     if (file) {
       // Handle file upload
-      endpoint = '/upload-file';
+      endpoint = '/api/upload-file';
       const formData = new FormData();
       formData.append('file', file);
       body = formData;
     } else if (emailText.trim()) {
       // Handle text input
-      endpoint = '/process-email';
+      endpoint = '/api/process-email';
       body = JSON.stringify({ email_text: emailText });
       headers['Content-Type'] = 'application/json';
     } else {
@@ -62,7 +60,7 @@ function App() {
     }
 
     try {
-      const response = await fetch(`${backendUrl}${endpoint}`, {
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: headers,
         body: body,
