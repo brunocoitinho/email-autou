@@ -143,7 +143,7 @@ def read_root():
     return {"message": "AutoU Email Analysis API is running."}
 
 
-@app.post("/process-email", response_model=AnalysisResponse)
+@app.post("/api/process-email", response_model=AnalysisResponse)
 async def process_email(email_input: EmailInput):
     """
     Receives email text, processes it, and returns classification and suggestion.
@@ -153,7 +153,7 @@ async def process_email(email_input: EmailInput):
     return AnalysisResponse(category=category, suggested_response=suggested_response)
 
 
-@app.post("/upload-file", response_model=AnalysisResponse)
+@app.post("/api/upload-file", response_model=AnalysisResponse)
 async def upload_file(file: UploadFile = File(...)):
     """
     Receives a file (.txt or .pdf), extracts text, and returns analysis.
