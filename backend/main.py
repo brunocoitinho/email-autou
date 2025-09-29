@@ -37,13 +37,20 @@ if not gemini_api_key:
 genai.configure(api_key=gemini_api_key)
 
 
-# --- NLTK Setup ---
+import nltk
+import os
+
+# Point NLTK to the local nltk_data directory where 'punkt' is stored
+# This is necessary for serverless environments like Vercel
+nltk_data_path = os.path.join(os.path.dirname(__file__), 'nltk_data')
+if os.path.exists(nltk_data_path):
+    nltk.data.path.append(nltk_data_path)
+
+# Configure Gemini API
 try:
-    nltk.data.find('tokenizers/punkt')
-    nltk.data.find('corpora/stopwords')
-except LookupError:
-    nltk.download('punkt')
-    nltk.download('stopwords')
+    genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+except Exception as e:
+    print(f"Error configuring Gemini: {e}")
 
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
