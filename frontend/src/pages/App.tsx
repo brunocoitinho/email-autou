@@ -160,7 +160,7 @@ function App() {
           <div className={styles.results__item}>
             <strong>Categoria:</strong>
             <p id="result-category" className={result.category === 'Productive' ? styles.productive : styles.improductive}>
-              {result.category}
+              {result.category === 'Productive' ? "Produtivo" : "Improdutivo"}
             </p>
           </div>
           <div className={styles.results__item}>
